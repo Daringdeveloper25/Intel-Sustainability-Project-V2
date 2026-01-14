@@ -1,0 +1,272 @@
+/* Add your CSS here */
+
+/* Top section with blue background */
+.intel-header {
+  background-color: #0049e7; /* Intel blue color */
+  padding: 20px 10px;
+  text-align: center;
+}
+
+/* Logo styling */
+.intel-logo {
+  width: 100px;
+  margin-bottom: 0px;
+}
+
+/* Light blue line between logo and heading */
+.intel-header-line {
+  width: 300px;                /* Make the line a bit wide */
+  height: 5px;                /* Thin horizontal line */
+  background-color: #b3e0ff;  /* Light blue color */
+  margin: 16px auto 16px auto;/* Space above and below, center horizontally */
+  border-radius: 3px;         /* Rounded edges */
+}
+
+/* Headline styling */
+.intel-headline {
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 2em;
+  margin: 10px 0;
+}
+
+/* Subheading styling */
+.intel-subheading {
+  color: #b3e0ff;
+  font-family: Arial, sans-serif;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+/* Timeline container styles for side scrolling */
+.timeline-container {
+  display: flex; /* Arrange cards in a row */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden;
+  padding: 40px 0;
+  gap: 40px; /* More space between cards */
+  background: #8bc5ff;
+  width: 100%; /* Take full width of parent */
+  max-width: 100vw; /* Prevent from overflowing the viewport */
+  min-width: 0;
+  margin: 0 auto;
+  /* Enable horizontal scroll snap */
+  scroll-snap-type: x mandatory; /* Enable horizontal scroll snap */
+  scroll-padding-left: 50vw;     /* Helps center the first card */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+}
+
+/* Timeline card styles */
+.timeline-card {
+  background: white;
+  border: 2px solid #cce0f7;
+  border-radius: 16px;
+  min-width: 350px;  /* Each card has a minimum width */
+  width: 350px;
+  height: 420px;   /* Much taller */
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  overflow: hidden;
+  font-size: 1.25em; /* Larger text */
+  word-break: break-word;
+  /* Snap each card to the start of the scroll area */
+  scroll-snap-align: center; /* Snap each card to the center of the viewport */
+}
+
+/* Show image on the front of the card by default */
+/* Only the image should be visible on the front (unhovered) */
+.card-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* Center horizontally */
+  justify-content: center;  /* Center vertically */
+  text-align: center;       /* Center any inline content */
+  height: 100%;             /* Take full height of the card */
+  width: 100%;              /* Take full width of the card */
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 1;
+  background: #e6f2fb;
+  transition: opacity 0.3s;
+  padding: 0;               /* Remove extra padding */
+  /* Only show the image, not the year */
+}
+
+/* Make the image take up most of the card */
+.card-front img {
+  max-width: 98%;
+  max-height: 85%;
+  object-fit: contain;
+  border-radius: 10px;
+  margin: 0 auto;           /* Center horizontally */
+  display: block;
+}
+
+/* If you have a year element inside .card-front, hide it */
+/* Only show the image on the front of the card (not the year) */
+.card-front .card-year {
+  display: none; /* Hide the year on the front of the card */
+}
+
+/* Hide the back by default */
+.card-back {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  color: #222;
+  padding: 30px 18px;
+  box-sizing: border-box;
+  z-index: 2;
+  transition: opacity 0.3s;
+  text-align: center;
+  font-size: 1.15em;
+  line-height: 1.3;
+  overflow-y: auto;
+}
+
+/* Card back heading styles */
+.card-back h3 {
+  font-size: 1.2em;
+  margin: 10px 0 8px 0;
+}
+
+/* Card back paragraph styles */
+.card-back p {
+  font-size: 1em;
+  margin: 0;
+}
+
+/* If you have a year element inside .card-back, style it here */
+/* On the back, make the year bold and at the top */
+.card-back .card-year {
+  font-weight: bold;
+  font-size: 1.7em;
+  color: #0071c5;
+  margin-bottom: 14px;
+  display: block;
+}
+
+/* Make timeline scroll bar visible for beginners */
+.timeline-container::-webkit-scrollbar {
+  height: 16px;
+  display: block;
+}
+.timeline-container::-webkit-scrollbar-thumb {
+  background: #b3e0ff;
+  border-radius: 7px;
+}
+.timeline-container::-webkit-scrollbar-track {
+  background: #e6f2fb;
+}
+
+/* Responsive: stack cards on small screens */
+@media (max-width: 600px) {
+  /* Make the timeline vertical on small screens */
+  .timeline-container {
+    flex-direction: column;        /* Stack cards vertically */
+    overflow-x: hidden;
+    overflow-y: auto;           /* Only show vertical scrollbar if needed */
+    gap: 18px;
+    width: 100%;                /* Use 100% of parent, not 100vw */
+    min-width: 0;
+    max-width: 100vw;
+    padding: 0 10px;            /* Add 10px padding left/right to match header */
+    margin: 0;                     /* Remove default margin */
+    scroll-snap-type: none;
+    scroll-padding-left: 0;
+    box-sizing: border-box;
+    background: #8bc5ff;        /* Blue background for the timeline */
+    position: relative;         /* Needed for ::after trick below */
+  }
+  .timeline-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: 320px;
+    font-size: 1em;
+    margin: 0;
+    scroll-snap-align: none;
+    background: white;          /* Make sure card background is always white */
+    box-sizing: border-box;     /* Include padding and border in width */
+    position: relative;         /* Needed for stacking context */
+    z-index: 1;                 /* Make sure card is above background */
+  }
+  /* Fix for the last card: add a white overlay on the right edge to cover blue line */
+  .timeline-card:last-child::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;                 /* Covers any blue line on the right */
+    height: 100%;
+    background: white;
+    pointer-events: none;
+    z-index: 2;
+    border-radius: 0 16px 16px 0; /* Match card's border radius */
+  }
+  .card-back {
+    font-size: 1em;
+    padding: 15px 8px;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow-x: auto;
+    /* No overflow-y here, so no vertical scrollbar on card */
+  }
+  /* Show vertical scrollbar for beginners */
+  .timeline-container::-webkit-scrollbar {
+    width: 12px;
+    height: 0;
+    display: block;
+  }
+  .timeline-container::-webkit-scrollbar-thumb {
+    background: #b3e0ff;
+    border-radius: 7px;
+  }
+  .timeline-container::-webkit-scrollbar-track {
+    background: #b3e0ff;
+  }
+}
+
+/* Make sure the back of the card appears on hover */
+.timeline-card:hover .card-front {
+  opacity: 0;
+  pointer-events: none; /* Prevent interaction with the front when hidden */
+}
+
+.timeline-card:hover .card-back {
+  opacity: 1;
+  pointer-events: auto;
+  /* Make sure the back is above the front */
+  z-index: 3;
+}
+
+/* Make the card slightly bigger when hovered */
+.timeline-card:hover {
+  transform: scale(1.08); /* Slightly increase size */
+  z-index: 4;             /* Make sure hovered card is above others */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18); /* Stronger shadow for effect */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.timeline-bottom-text{
+  text-align: center;
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f5faff; /* Match the timeline background */
+  border-top: 1px solid #cce0f7; /* Subtle border to separate from content */
+  border-radius: 0 0 16px 16px; /* Rounded corners at the bottom */
+  font-family: Arial, sans-serif;
+  line-height: 1.4;
+  max-width: 100%; /* Limit width for readability */
+  margin: 20px auto; /* Center the text */
+  padding: 20px; /* Add some padding for better spacing */  
+}
